@@ -5,6 +5,8 @@ One Page Genealogy
 
 ##opg-old
 Original Java implementation of One Page Genealogy. Very hard to understand code.
+* test1.pdf --> good example of multisheet chart
+* OnePageGenealogy.ppt --> some slides that show how opg works
 
 ##opg-new
 Java version of basic GUI and spacing algorithm.
