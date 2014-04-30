@@ -92,3 +92,8 @@ Spacer.position = function(parent) {
 		Spacer.position(parent.children[i]);
 	}
 }
+
+Spacer.run = function(root) {
+	Spacer.space(root);
+	Spacer.position(root);
+}
