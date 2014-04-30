@@ -1,0 +1,90 @@
+ACTUALLY FIX COLLAPSE PROBLEMS (See Multisheet when All ancestors cut off early with duplicates)
+
+ALPHA TEST WATERMARK
+Vertical Offset of Arrow Text affected by horizontal margin?! <(0_o)>
+
+Fixed the 'Chart Style' panel, so on smaller screens all the options are still available
+Rulers are way out of place
+4 Line TextBoxStyle overrusn the box side
+To get spouses ancestor line, poll to have the spouse login, so we can get their tree as well
+Have gen request start from end (if wants 12 gens, rquest 12-9 (3)
+Duplicates: Multisheet, use arrows, One Page, use circles (make the box less wide to make room for the circle, but have the height of the box double so you have room for hte information)
+Make future charts be created with starting ances level that of the bases choice, it errors out if not.
+Have the option for 'working multisheet', where the non-existent boxes are drawn as gray outlines
+Have duplicates keep the coloring of their local box, not the initial one
+The Ancestor/Descendant offsets on the Descendancy chart still need to have checks for connection lines (when they're offset too much) and moved to all other types
+The fix for drawing connection lines in Multisheet only when on page is to draw them always. Fix this?
+
+TODO!!!
+Have end of line arrows, when clicked, go to that page
+Have Index Page show up in chart browsing
+Allow them to set root from other pages, but have it set the base root
+PDF now prints multipage, make 'print' do the same.			
+Fix how the OPG logo is drawn.  It's done by static numbers right now
+
+Look into Descendancy Multisheet Chart
+
+Add picture support?
+"Dummy" pages of the multisheet need to set their maximum chooseable ancestors to the chosen ancestors of the root
+  (if your root page has like, 2, then the next pages will have 5 as default, and it wont create additional pages)
+Cut Multisheet down to 5 max generations (use a static variable)
+implement the "isInTree" for descBox
+Arrow shaft length, percent of how many displayed gens to how many available, arrow head length is amount of 
+displayed individuals verse amount behind the person
+Vertical chart length, max is 6ft (for simplicity sake)
+
+Bugs:
+1) Sometimes the maternal generation doesn't update correctly (Tanner bottom) Also, on really big charts it seems to only go back so far.  
+   Caused by the duplicate tokens. THe "How far back" is determined by the boxes. WHen they're duplicates, the boxes stop tracing back. So it's
+   correct in one place, but not in the places after that. Do we want to look more into how it does duplicates?
+2) When drawing boxes the render is determined by placement of text (or possibly middle of box?), not actual box size. (This might be fixed)
+3) Generations displayed on the tree does not update when a gen is collapsed.
+5)If the box width is too small, it compresses the name, but overflows the birthdate and place (one line style)
+6)In 180degree orientation, with parallel descendant box, the Husband is still on the left and the wife on the right.
+7)Working chart keeps minimum chart length of other charts
+8)a lot of options aren't set on initialisation. Look into that.
+9)Top Margin is determined by the bottom margin value?!
+10)The working chart ignores margins, at least for the generation label top placement
+11)Look into the 'zoom' part.  Sometimes (especially on larger charts where the base 'zoom' is close to the size of the chart),
+   The zoom box can flip into negatives, or get stuck at 0.  Problems!
+12)III showing up as Iii? (Joseph Smith Chart)
+13)Dunn, Simeon (ABT 1730) on Portrait, not include spouse, root box is squished?
+14)OPG Save doesn't work at all
+15)When increasing the chart 'height' in landscape mode, it doesn't work properly. Possibly connected, the auto-resize for Landscape is off?
+
+Todo:
+1) When people with collapsed ancestors reach the last displayed generation, their ancestor triangles turn into one, so the people can't be clicked anymore. Fix this!
+2) When changing the root, uncollapse all trees.
+3) When displaying a collapsed triangle box, have it considered for algorithm placement
+4) Make the collapse tree function work for children when used on descendants
+5) Remove the ',' when displaying places, left over from unknown value
+7) Remove all max/min font size referrences
+8) Add a new line style type, Children, and how many children or descendants they have
+9) Make the 'show info' panel actually good
+10) Fix Landscape/Portrait variations with the chartMargin in the makers
+12) Make the 'special' rulers' size depend on the size of the actual chart
+13) When there is only a mother or only a father, the shift offset is a fixed value (3) make dynamic
+14) Make it save the chosen "Ances" and Desc" gen amount
+15) For collapsing ancestors, on Multisheet the collapsed person is still drawn, however on portrait and landscape it turns them into an arrow
+16) Implement the "isInTree" for descBox
+17) Vertical chart length, max is 6ft (for simplicity sake)  
+  
+  Graphic Designer Notes:
+  1. make the information be 70% black, and the names be 100% black
+
+Good Descendant Seed:
+Tanner File, Molyneux, William (ABT 1471 OR 1472-26 Mar 1548)
+Tori File, Dunn, Simeon (7 Aug 1803-)
+
+Graphical:
+
+Create a greater seperance between birth and death information
+Look more into not using the blackstroke border?
+
+Interesting Fact: If someone doesn't have a gender, NFS won't download their children
+
+
+Version Two:
+
+Moveable text boxes! ie for Header labels
+For multiple marriage boxes, look into having the common spouse pritned only once

@@ -1,0 +1,95 @@
+Initialize Chart:
+	If Changed
+		Reset Ancestor flags so tree can be built from scratch
+		Adds AncestorTree, which auto builds the tree from root (AncesBox.buildBoxTree())
+			AncesBox:
+			If father exists, set what generation he's in, add the box to the list of boxes,
+			If this is first occurence, repeat recursively. If duplicate, stop here.
+			Repeat for mother.
+			
+		Gets the furthest back the Ancestor tree goes, sets the slider accordingly
+		
+		Reset Descendant flags so tree can be built from scratch
+		Add DescendantTree, which auto builds the tree from root (DescBox.builBoxTree())
+			DescBox:
+			Sets the generation, and vertical order
+			Goes through all families of this descendant, creates a list of viable ones, and
+			  replaces the individuals families with the now good one.
+			Iterates through each of the families, if it's in the tree:
+				Creates a new DescInnerBox for the family, containing indi information,
+				  A list of children, and offset information
+				Adds this innerBox to the list, and sets a flag saying it's there
+				If there are children, creates a box for them, builds their tree, 
+				  and adds them to the list, updating depth as it goes
+			If the person is single, adds them to the list.
+		Updates the depth of the descendant trees
+		Resets all flags of Ancestors and Descendants
+		setBoxWidth()
+			Sets the box width of all boxes, dependant on how many ancestors and descendants there are
+		findLabelFontSize()
+			Goes through every generation, finding the longest Generation label, finding the height
+			  of the font, and if gen titles are enabled, adds that to the header height
+		Resets all the flags again, and clears duplicate labels
+		
+		
+		If the amount of visible ancestors has changed, For each ancestor tree (IE, Root + spouse)
+			AncesBox.calcCoords()
+				*Sets a temporary box height
+				Sets the subtreeUpperBound to the boxes upper height, and lowerBound to the boxes lower height
+				Adds the boxes upper and lower bound to the first element in the upper and lower bounds array
+				FOr mother and father, tag on duplicate label (if one) and recursively calc coords
+				Records how far back the tree goes in generations
+				If no father:
+					Goes back all generations and adds previous upper and lower bounds to the list. (Goes down the mother)
+					Sets the Mothers offset to a pre-determined amount, so it's not a straight line
+					Updates the subTree upper and lower bounds. If this box is bigger, uses that,
+					   If the rest of the subtree is higher and lower, uses that.
+				Else if no mother:
+					Goes back all generations and adds previous upper and lower bounds to the list. (Goes down the father)
+					Sets the Mothers offset to a pre-determined amount, so it's not a straight line
+					Updates the subTree upper and lower bounds. If this box is bigger, uses that,
+					   If the rest of the subtree is higher and lower, uses that.
+				Else if both mother and father
+					calcIntersectDist()
+						Goes through all generations, comparing the bottom bound of the father to the top of the mother
+						Finds the most needy (the largest, meaning needing the most space) and returns this
+					Sets the mother and father offset by what was determined in calc intersect dist
+					Updates upper bounds, by calculating the fathers' upper
+					Updates lower bounds, by calculating the mothers' lower
+					Updates the subTree upper and lower bounds. If this box is bigger, uses that,
+					   If the rest of the subtree is higher and lower, uses that.
+			Resets all flags
+			Sets the boxes minimum height as the total between the root/spouses subtree upper and lower bounds
+			Sets the roots/spouses vertical position to 0
+			setRelativePosition():
+				Recursively goes through the tree, setting the vertical position dependant on their childs, and their own
+				  vertical offset
+		updateAncesHeight():
+			Takes the height of both ancestor trees (root + spouse), and adds their total subtree heights together, giving whole chart height
+		Sets box width again?
+		
+
+		If the amount of visible descendants has changed, For each descendant tree (IE, Root + spouse)
+			DescTree.calcCoords()
+				Sets the box height to the minimum it can be
+				Sets the upper and lower subtree height by the box height
+				Adds this box to the list of upper and lower bounds, using the boxHeight
+				**FIGURE THE REST OF THIS NONSENSE OUT LATER**
+			setRelativePosition():
+				Sets the vertical position, dependant on the child offsets, then continues recursively
+			updateDescHeight():
+				Updates the minimumHeight to be the current height of the tree
+		Sets box width again?
+
+					
+		IF PAPER IS PORTRAIT
+			While the ancestor tree height is larger than the max paper height, remove 1 gen, recalculate placement, continue until it fits
+			While the descendant tree height is larger than the max paper height, remove 1 gen, recalculate placement, continue until it fits
+			Sets chart height to the new height, and resizes the paper accordingly
+		IF PAPER IS LANDSCAPE
+			While the ancestor tree height is larger than the max paper height, remove 1 gen, recalculate placement, continue until it fits
+			While the descendant tree height is larger than the max paper height, remove 1 gen, recalculate placement, continue until it fits
+			Sets chart height to the new height, and resizes the paper accordingly
+
+generateChart():
+	
