@@ -11,7 +11,7 @@ Java version of basic GUI and spacing algorithm.
 
 ##opg-web
 Javascript implementation of basic spacing algorithm.
-<br>js/core
+###js/core
 * generator.js --> generates trees for testing
 * node.js      --> basic building element of a tree
 * bounds.js    --> keeps track of each upper and lower bounds at each generation
